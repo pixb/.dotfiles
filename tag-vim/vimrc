@@ -87,6 +87,7 @@ set grepprg=rg\ --vimgrep\ $*
 " ===========键位映射==============
 let mapleader="\<space>"
 let g:maplocalleader=";"
+inoremap jk <ESC>
 nnoremap <LEADER>ev :vsplit $MYVIMRC<CR>
 nnoremap <LEADER>sv :source $MYVIMRC<CR>
 " 引号快速插入与删除
