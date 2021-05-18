@@ -76,10 +76,18 @@ autoload -U compinit && compinit -u
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 export JAVA_HOME="/usr/local/jdk-11"
+export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
 
 ###########
 #  pyenv  #
 ###########
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
+
+
+
+
 
