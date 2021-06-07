@@ -1,15 +1,11 @@
+source ~/.zprofile
 ###############
 #  oh-my-zsh  #
 ###############
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
-
 plugins=(
     git
     vi-mode
 )
-
-source $ZSH/oh-my-zsh.sh
 
 ###########
 #  zplug  #
@@ -84,4 +80,3 @@ export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
 ###########
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
-
