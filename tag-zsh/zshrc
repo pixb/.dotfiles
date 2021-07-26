@@ -71,7 +71,7 @@ autoload -U compinit && compinit -u
 ##########
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
-export JAVA_HOME="/usr/local/jdk-11"
+export JAVA_HOME="/usr/local/jdk1.8.0_221"
 export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
 
 
