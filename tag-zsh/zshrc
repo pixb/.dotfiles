@@ -60,6 +60,13 @@ source $HOME/.profile
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH=$PATH:$HOME/go/bin
 
+##################
+#  local script  #
+##################
+
+export PATH=$PATH:$HOME/dev/work-note/shell
+
+
 ##############
 #  autojump  #
 ##############
@@ -108,4 +115,26 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+
+
+export PATH="$HOME/.jenv/bin:$PATH"
+
+
+eval "$(jenv init -)"
+
+
+export PATH="$HOME/.jenv/bin:$PATH"
+
+
+eval "$(jenv init -)"
+
+
+export PATH="$HOME/.jenv/bin:$PATH"
+
+
+eval "$(jenv init -)"
 
