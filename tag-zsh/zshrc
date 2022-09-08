@@ -77,9 +77,9 @@ autoload -U compinit && compinit -u
 #  jenv  #
 ##########
 export PATH="$HOME/.jenv/bin:$PATH"
-# export JAVA_HOME="/usr/local/jdk1.8.0_141"
-# export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
-# export PATH="$PATH:${JAVA_HOME}/lib/tools.jar"
+export JAVA_HOME="/usr/local/jdk-18.0.2.1"
+export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
+export PATH="$PATH:${JAVA_HOME}/lib/tools.jar"
 
 
 ###########
