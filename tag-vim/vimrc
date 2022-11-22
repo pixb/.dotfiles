@@ -173,5 +173,6 @@ function! SetTitle()
     autocmd BufNewFile * normal G
 endfunc
 
+
 filetype plugin indent on
 syntax enable
