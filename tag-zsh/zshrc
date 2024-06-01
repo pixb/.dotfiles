@@ -82,11 +82,19 @@ autoload -U compinit && compinit -u
 ##########
 #  jenv  #
 ##########
+<<<<<<< HEAD
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 export JAVA_HOME="/usr/local/jdk-17.0.9/"
 export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
 export PATH="$PATH:${JAVA_HOME}/lib/tools.jar"
+=======
+#export PATH="$HOME/.jenv/bin:$PATH"
+#eval "$(jenv init -)"
+#export JAVA_HOME="/usr/local/jdk-18.0.2.1"
+#export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
+#export PATH="$PATH:${JAVA_HOME}/lib/tools.jar"
+>>>>>>> 21ba3a30c72e5e182f35b0775d249912b4228eeb
 
 
 ###########
