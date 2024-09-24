@@ -9,38 +9,35 @@ plugins=(
 )
 
 ###########
-#  zplug  #
+#  zinit  #
 ###########
-source ~/.zplug/init.zsh
+ZINIT_FILE=$HOME/.local/share/zinit/zinit.git/zinit.zsh
+if [ -e ${ZINIT_FILE} ]; then
+  source ${ZINIT_FILE}
+else
+  bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+fi
+
 # History config
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
-# zplug plugins
-zplug "romkatv/powerlevel10k", as:theme, depth:1
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zdharma/fast-syntax-highlighting"
-zplug "zpm-zsh/ls"
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/composer", from:oh-my-zsh
-zplug "plugins/extract", from:oh-my-zsh
-zplug "lib/completion", from:oh-my-zsh
-zplug "plugins/sudo", from:oh-my-zsh
-zplug "b4b4r07/enhancd", use:init.sh
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+# zinit plugins
+zinit light romkatv/powerlevel10k
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma/fast-syntax-highlighting
+zinit light zpm-zsh/ls
+zinit snippet OMZ::plugins/extract/extract.plugin.zsh
+zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+zinit light b4b4r07/enhancd
 
-# Then, source plugins and add commands to $PATH
-zplug load
+# Install plugins if there are plugins that have not been installed
+# zinit self-update
+# zinit update --all
+
 
 ###################
 #  my 10k config  #
@@ -127,3 +124,13 @@ eval "$(pyenv init -)"
 
 export PATH="$HOME/dev/filecxx:$PATH"
 ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
