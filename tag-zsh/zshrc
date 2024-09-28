@@ -107,11 +107,12 @@ autoload -U compinit && compinit
 zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit light zpm-zsh/ls
 zinit snippet OMZ::plugins/extract/extract.plugin.zsh
 zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
-zinit light b4b4r07/enhancd
+# zinit light b4b4r07/enhancd
 
 # Install plugins if there are plugins that have not been installed
 # zinit self-update
