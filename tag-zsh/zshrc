@@ -1,46 +1,28 @@
+# Load Zsh profile
 source ~/.zprofile
+
 ###############
 #  oh-my-zsh  #
 ###############
 plugins=(
     git
-# remove vi-mode
-#    vi-mode
+    # 其他需要的插件可以在此添加
 )
 
 ###########
-#  zplug  #
+#  zinit  #
 ###########
-source ~/.zplug/init.zsh
-# History config
+ZINIT_FILE=$HOME/.local/share/zinit/zinit.git/zinit.zsh
+if [ -e ${ZINIT_FILE} ]; then
+    source ${ZINIT_FILE}
+else
+    bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+fi
+
+# History configuration
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
-
-# zplug plugins
-zplug "romkatv/powerlevel10k", as:theme, depth:1
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zdharma/fast-syntax-highlighting"
-zplug "zpm-zsh/ls"
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/composer", from:oh-my-zsh
-zplug "plugins/extract", from:oh-my-zsh
-zplug "lib/completion", from:oh-my-zsh
-zplug "plugins/sudo", from:oh-my-zsh
-zplug "b4b4r07/enhancd", use:init.sh
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Then, source plugins and add commands to $PATH
-zplug load
 
 ###################
 #  my 10k config  #
@@ -52,8 +34,7 @@ source ~/.pl10krc
 #########################
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=yellow'
 
-
-# my configure
+# Load my custom configurations
 source $HOME/dev/linux-demo/config/alias.zsh
 source $HOME/dev/linux-demo/config/git.zsh
 source $HOME/dev/linux-demo/config/fzf.zsh
@@ -64,20 +45,17 @@ source $HOME/.profile
 #  fzf  #
 #########
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# PATH configuration
 export PATH=$PATH:$HOME/go/bin
-
-##################
-#  local script  #
-##################
-
 export PATH=$PATH:$HOME/dev/work-note/shell
-
+export PATH=$HOME/.pyenv/bin:$PATH
+export PATH=$PATH:$HOME/dev/filecxx:$PATH
 
 ##############
 #  autojump  #
 ##############
 [[ -s /home/pix/.autojump/etc/profile.d/autojump.sh ]] && source /home/pix/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -u
 
 ##########
 #  java  #
@@ -86,34 +64,30 @@ export JAVA_HOME="/usr/local/jdk-17.0.9/"
 export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
 export PATH="$PATH:${JAVA_HOME}/lib/tools.jar"
 
-
 ###########
 #  pyenv  #
 ###########
-export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 
 ######
 #  ex  #
 ######
-#
-# # ex - archive extractor
-# # usage: ex <file>
-ex ()
-{
-  if [ -f $1 ] ; then
+# ex - archive extractor
+# usage: ex <file>
+ex () {
+  if [ -f "$1" ]; then
     case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
+      *.tar.bz2)   tar xjf "$1"   ;;
+      *.tar.gz)    tar xzf "$1"   ;;
+      *.bz2)       bunzip2 "$1"    ;;
+      *.rar)       unrar x "$1"    ;;
+      *.gz)        gunzip "$1"     ;;
+      *.tar)       tar xf "$1"     ;;
+      *.tbz2)      tar xjf "$1"    ;;
+      *.tgz)       tar xzf "$1"    ;;
+      *.zip)       unzip "$1"      ;;
+      *.Z)         uncompress "$1"  ;;
+      *.7z)        7z x "$1"       ;;
       *)           echo "'$1' cannot be extracted via ex()" ;;
     esac
   else
@@ -121,11 +95,27 @@ ex ()
   fi
 }
 
+# Load JetBrains VM options
+___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"
+[ -f "${___MY_VMOPTIONS_SHELL_FILE}" ] && . "${___MY_VMOPTIONS_SHELL_FILE}"
 
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
+#################
+#  zinit plugins
+#################
+# Ensure compinit is loaded before loading plugins
+autoload -U compinit && compinit
+zinit light romkatv/powerlevel10k
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma/fast-syntax-highlighting
+zinit light zpm-zsh/ls
+zinit snippet OMZ::plugins/extract/extract.plugin.zsh
+zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+# zinit light b4b4r07/enhancd
 
-export PATH="$HOME/dev/filecxx:$PATH"
-___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
+# Install plugins if there are plugins that have not been installed
+# zinit self-update
+# zinit update --all
 
 source "$HOME/.sdkman/bin/sdkman-init.sh"
