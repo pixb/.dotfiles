@@ -44,7 +44,6 @@ source $HOME/.profile
 #########
 #  fzf  #
 #########
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # PATH configuration
 export PATH=$PATH:$HOME/go/bin
