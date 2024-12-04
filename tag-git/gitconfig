@@ -34,8 +34,6 @@
 	added = green bold
 	changed = yellow bold
 	untracked = red bold
-[safe]
-    directory = *
 [diff]
 	tool = nvimdiff
 [difftool]
