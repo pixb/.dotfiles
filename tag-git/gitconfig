@@ -47,3 +47,5 @@
 [commit]
 	template = ~/dev/linux-demo/git/.gitmessage
 	
+[safe]
+	directory = /work/docker/docker-prometheus
