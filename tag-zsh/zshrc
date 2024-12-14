@@ -119,3 +119,4 @@ zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 ### End of Zinit's installer chunk
+### End of Zinit's installer chunk
