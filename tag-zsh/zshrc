@@ -67,6 +67,10 @@ export PATH="$PATH:${JAVA_HOME}/lib/tools.jar"
 #  pyenv  #
 ###########
 eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
+if [ -d "${HOME}/.venv" ]; then
+  source "${HOME}/.venv/bin/activate"
+fi
 
 ######
 #  ex  #
@@ -120,3 +124,12 @@ zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 ### End of Zinit's installer chunk
 ### End of Zinit's installer chunk
+### End of Zinit's installer chunk
+
+# 设置 vi 模式
+set -o vi
+
+if pacman -Qi cuda &>/dev/null; then
+  export PATH=/opt/cuda/bin:$PATH
+  export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
+fi
