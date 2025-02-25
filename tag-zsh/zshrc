@@ -40,6 +40,7 @@ source $HOME/dev/linux-demo/config/git.zsh
 source $HOME/dev/linux-demo/config/fzf.zsh
 source $HOME/dev/linux-demo/config/android.zsh
 source $HOME/.profile
+export PATH=$PATH:$HOME/dev/linux-demo/pix-shell
 
 #########
 #  fzf  #
@@ -133,3 +134,4 @@ if pacman -Qi cuda &>/dev/null; then
   export PATH=/opt/cuda/bin:$PATH
   export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 fi
+### End of Zinit's installer chunk
