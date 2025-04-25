@@ -135,3 +135,4 @@ if pacman -Qi cuda &>/dev/null; then
   export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 fi
 ### End of Zinit's installer chunk
+### End of Zinit's installer chunk
