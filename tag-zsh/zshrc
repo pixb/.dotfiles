@@ -40,17 +40,18 @@ source $HOME/dev/linux-demo/config/git.zsh
 source $HOME/dev/linux-demo/config/fzf.zsh
 source $HOME/dev/linux-demo/config/android.zsh
 source $HOME/.profile
-export PATH=$PATH:$HOME/dev/linux-demo/pix-shell
+export PATH=$HOME/dev/linux-demo/pix-shell:$PATH
+export PATH=$HOME/dev/linux-demo/bin:$PATH
 
 #########
 #  fzf  #
 #########
 
 # PATH configuration
-export PATH=$PATH:$HOME/go/bin
-export PATH=$PATH:$HOME/dev/work-note/shell
+export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/dev/work-note/shell:$PATH
 export PATH=$HOME/.pyenv/bin:$PATH
-export PATH=$PATH:$HOME/dev/filecxx:$PATH
+export PATH=$HOME/dev/filecxx:$PATH
 
 ##############
 #  autojump  #
