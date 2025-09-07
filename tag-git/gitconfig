@@ -39,11 +39,15 @@
 [difftool]
 	prompt = false
 [merge]
-  tool = diffmerge
+  ; tool = diffmerge
+tool = nvimdiff
 # [mergetool "diffmerge"]
 #   cmd = diffmerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
 # [includeIf "gitdir:~/dev/linux-demo/git/"]
 # 	path = ~/dev/linux-demo/git/.gitconfig
+[mergetool "nvimdiff"]
+  cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
 [commit]
 	template = ~/dev/linux-demo/git/.gitmessage
 	
