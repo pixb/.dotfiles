@@ -42,14 +42,28 @@ source $HOME/dev/linux-demo/config/android.zsh
 source $HOME/.profile
 
 #########
+#  env  #
+#########
+
+#########
 #  fzf  #
 #########
 
 # PATH configuration
-export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/dev/work-note/shell
 export PATH=$HOME/.pyenv/bin:$PATH
 export PATH=$PATH:$HOME/dev/filecxx:$PATH
+export PATH=$HOME/dev/linux-demo/pix-shell:$PATH
+export PATH=$HOME/dev/linux-demo/bin:$PATH
+
+
+############
+#  golang  #
+############
+go env -w GO111MODULE=on
+export GOPROXY=https://goproxy.cn,direct
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 ##############
 #  autojump  #
