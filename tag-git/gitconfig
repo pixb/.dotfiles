@@ -49,3 +49,5 @@
 	
 [safe]
 	directory = /work/docker/docker-prometheus
+[http]
+	postBuffer = 524288000
