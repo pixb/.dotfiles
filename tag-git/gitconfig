@@ -6,6 +6,8 @@
 	whitespace = fix, -indent-with-non-tab, trailing-space, cr-at-eol
 	excludesfile=~/.gitignore_global
 	autocrlf = input
+[init]
+  defaultBranch = main
 [alias]
     rm="rebase master"
     dc="diff --cached"
@@ -35,9 +37,11 @@
 	changed = yellow bold
 	untracked = red bold
 [diff]
-	tool = nvimdiff
-[difftool]
-	prompt = false
+tool = vimdiff
+  ; cmd = /home/pix/dev/test/testgitdiff/nvimdiff_debug.sh "$LOCAL" "$REMOTE"
+[difftool "vimdiff"]
+prompt = false
+cmd = /usr/bin/nvim -d $LOCAL $REMOTE
 [merge]
   ; tool = diffmerge
 tool = nvimdiff
