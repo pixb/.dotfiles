@@ -19,6 +19,7 @@ else
     bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 fi
 
+
 # History configuration
 HISTSIZE=10000
 SAVEHIST=10000
@@ -63,6 +64,15 @@ export PATH=$HOME/dev/linux-demo/bin:$PATH
 ############
 #  golang  #
 ############
+GVM_FILE=$HOME/.gvm/scripts/gvm
+if [ -e ${GVM_FILE} ]; then
+    source ${GVM_FILE}
+else
+  bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+  source ${GVM_FILE}
+fi
+gvm install go1.25.1 -B --with-protobuf
+gvm use go1.25.1 --default
 go env -w GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct
 export GOPATH=$HOME/go
@@ -152,3 +162,5 @@ if pacman -Qi cuda &>/dev/null; then
 fi
 ### End of Zinit's installer chunk
 ### End of Zinit's installer chunk
+
+[[ -s "/home/pix/.gvm/scripts/gvm" ]] && source "/home/pix/.gvm/scripts/gvm"
