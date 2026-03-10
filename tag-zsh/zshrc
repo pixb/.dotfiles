@@ -8,7 +8,6 @@ plugins=(
     git
     # 其他需要的插件可以在此添加
 )
-
 ###########
 #  zinit  #
 ###########
@@ -44,64 +43,59 @@ source $HOME/.profile
 export PATH=$HOME/dev/linux-demo/pix-shell:$PATH
 export PATH=$HOME/dev/linux-demo/bin:$PATH
 
-#########
-#  env  #
-#########
-
-#########
-#  fzf  #
-#########
-
-# PATH configuration
-export PATH=$PATH:$HOME/dev/work-note/shell
-export PATH=$PATH:$HOME/dev/work-note/shell
-export PATH=$HOME/.pyenv/bin:$PATH
-export PATH=$PATH:$HOME/dev/filecxx:$PATH
-export PATH=$HOME/dev/linux-demo/pix-shell:$PATH
-export PATH=$HOME/dev/linux-demo/bin:$PATH
-
-
 ############
 #  golang  #
 ############
 GVM_FILE=$HOME/.gvm/scripts/gvm
 if [ -e ${GVM_FILE} ]; then
-    source ${GVM_FILE}
+  source ${GVM_FILE}
 else
   bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
   source ${GVM_FILE}
 fi
-gvm install go1.25.1 -B --with-protobuf
-gvm use go1.25.1 --default
+if ! command -v go >/dev/null 2>&1; then
+  gvm install go1.25.1 -B --with-protobuf
+  gvm use go1.25.1 --default
+fi
 go env -w GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-##############
-#  autojump  #
-##############
-[[ -s /home/pix/.autojump/etc/profile.d/autojump.sh ]] && source /home/pix/.autojump/etc/profile.d/autojump.sh
 
-##########
-#  java  #
-##########
-export JAVA_HOME="/usr/local/jdk-17.0.9/"
-export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
-export PATH="$PATH:${JAVA_HOME}/lib/tools.jar"
 
 ###########
 #  pyenv  #
 ###########
-eval "$(pyenv init -)"
-eval "$(pyenv init --path)"
-if [ -d "${HOME}/.venv" ]; then
-  source "${HOME}/.venv/bin/activate"
+if [ ! -d "${HOME}"/.pyenv ]; then
+  echo -e "${COLOR_YELLOW}pyenv is not install${COLOR_NC}"
+  git clone https://github.com/pyenv/pyenv.git "${HOME}"/.pyenv
 fi
+if ! command -v python3 >/dev/null 2>&1; then
+  echo -e "${COLOR_YELLOW} python3 is not install${COLOR_NC}"
+  pyenv install 3.13.0
+  pyenv global 3.13.0
+fi
+export PATH=$HOME/.pyenv/bin:$PATH
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
 
-######
-#  ex  #
-######
+
+#########
+#  java #
+#########
+if [ ! -e $HOME/.sdkman ]; then
+	curl -s "https://get.sdkman.io" | bash
+fi
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export JAVA_HOME="/usr/local/jdk-17.0.9/"
+export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
+export PATH="$PATH:${JAVA_HOME}/lib/tools.jar"
+
+#######
+#  ex #
+#######
 # ex - archive extractor
 # usage: ex <file>
 ex () {
@@ -133,13 +127,20 @@ ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"
 #  zinit plugins
 #################
 # Ensure compinit is loaded before loading plugins
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-completions
+zinit ice wait'1' lucid  # 延迟 1 秒加载
 zinit light zsh-users/zsh-history-substring-search
+zinit ice wait'0' lucid  # 异步+静默加载
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit light zpm-zsh/ls
+zinit ice atload'
+    local zlua="${ZINIT[PLUGINS_DIR]:-$HOME/.local/share/zinit/plugins}/skywind3000--z.lua/z.lua"
+    [[ -f "$zlua" ]] && eval "$(lua "$zlua" --init zsh)"
+'
+zinit light skywind3000/z.lua
 zinit snippet OMZ::plugins/extract/extract.plugin.zsh
 zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 # zinit light b4b4r07/enhancd
@@ -148,19 +149,7 @@ zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 # zinit self-update
 # zinit update --all
 
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-### End of Zinit's installer chunk
-### End of Zinit's installer chunk
 ### End of Zinit's installer chunk
 
 # 设置 vi 模式
 set -o vi
-
-if pacman -Qi cuda &>/dev/null; then
-  export PATH=/opt/cuda/bin:$PATH
-  export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
-fi
-### End of Zinit's installer chunk
-### End of Zinit's installer chunk
-
-[[ -s "/home/pix/.gvm/scripts/gvm" ]] && source "/home/pix/.gvm/scripts/gvm"
