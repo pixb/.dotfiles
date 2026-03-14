@@ -93,6 +93,15 @@ export JAVA_HOME="/usr/local/jdk-17.0.9/"
 export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib
 export PATH="$PATH:${JAVA_HOME}/lib/tools.jar"
 
+###########
+#  rust   #
+###########
+if [ ! -e $HOME/.cargo ]; then
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
+. "$HOME/.cargo/env"
+
+
 #######
 #  ex #
 #######
@@ -153,3 +162,7 @@ zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 
 # 设置 vi 模式
 set -o vi
+### End of Zinit's installer chunk
+### End of Zinit's installer chunk
+
+[[ -s "/home/pix/.gvm/scripts/gvm" ]] && source "/home/pix/.gvm/scripts/gvm"
