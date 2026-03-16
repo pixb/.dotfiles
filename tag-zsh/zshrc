@@ -1,6 +1,9 @@
 # Load Zsh profile
 source ~/.zprofile
 
+# 设置 vi 模式
+set -o vi
+
 ###############
 #  oh-my-zsh  #
 ###############
@@ -28,6 +31,12 @@ HISTFILE=~/.zsh_history
 #  my 10k config  #
 ###################
 source ~/.pl10krc
+
+
+#########
+#  fzf  #
+#########
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #########################
 #  zsh-autosuggestions  #
@@ -160,7 +169,3 @@ zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 
 ### End of Zinit's installer chunk
 
-# 设置 vi 模式
-set -o vi
-### End of Zinit's installer chunk
-### End of Zinit's installer chunk
